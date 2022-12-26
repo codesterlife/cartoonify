@@ -6,6 +6,7 @@ import sys
 import matplotlib.pyplot as plt
 import sys
 import os
+import tkinter as tk
 
 def upload():
 
@@ -84,6 +85,17 @@ def cartoonify(ImagePath):
     for i, ax in enumerate(axes.flat):
         ax.imshow(images[i], cmap='gray')
 
-    plt.show()
+    # plt.show()
 
-upload()
+def save(resized6, ImagePath):
+
+    """ saving the image using imwrite() """
+
+    newName = "cartoonified_Image"
+    path1 = os.path.dirname(upload.ImagePath)
+    extension = os.path.splitext(upload.ImagePath)[1]
+    save_path = os.path.join(path1, newName + extension)
+    cv.imwrite(save_path, cv.cvtColor(resized6, cv.COLOR_RGB2BGR))
+
+    save_msg = "Image saved as " + newName + " at " + save_path
+    tk.messagebox.showinfo(title=None, message=save_msg)
